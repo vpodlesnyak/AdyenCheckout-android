@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">adyenpaysdk</string>
+
+    <!-- ERRORS -->
+    <string name="error_400">Unexpected response code 400</string>
+</resources>

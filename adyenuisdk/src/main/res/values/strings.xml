@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">AdyenCheckoutUI</string>
+
+    <string name="payment_confirmation_dialog_title">Payment confirmation</string>
+</resources>

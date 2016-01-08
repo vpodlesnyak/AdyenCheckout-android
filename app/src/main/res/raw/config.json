@@ -1,0 +1,7 @@
+{
+  "url": "https://test.adyen.com/hpp/cse/",
+  "urlSuffix": "/json.shtml",
+  "userToken": "8714279602311541",
+
+  "paymentRequestUrl": "https://merchant-pay.parseapp.com/payment"
+}
