@@ -25,7 +25,7 @@ You can integrate with Adyen library by either:
 Include the payment form to make your first payment.
 
 Follow these steps to edit your `build.gradle` and start using Adyen checkout for your Android application:
-1. Run `git pull git@git.is.adyen.com:android/pay.git`.
+1. Run `git pull https://github.com/Adyen/AdyenCheckout-android.git`.
 2. Copy `adyenpaysdk` and `adyenuisdk` in your application folder.
 3. Add `':adyenuisdk', ':adyenpaysdk'` in your `settings.gradle` file. 
 4. Copy `volley-release.aar` from one of the modules added above `lib` folder into your `app` lib folder.
@@ -85,7 +85,7 @@ This is a combination of the Adyen checkout UI library and the Adyen checkout SD
 offers the merchant the option to implement our UI for the credit card form and design their own screen around the credit card form. 
 Follow these steps to edit your `build.gradle` and start using Adyen checkout for your Android application:
 
-1. Run `git pull git@git.is.adyen.com:android/pay.git`.
+1. Run `git pull https://github.com/Adyen/AdyenCheckout-android.git`.
 2. Copy `adyenpaysdk` and `adyenuisdk` in your application folder.
 3. Add the following code snippet to your `dependencies` module insinde build.gradle:
 
@@ -127,7 +127,7 @@ Check our `adyen.com.adyenuisdk.PaymentFragment.java` for a complete code exampl
 ### Library implementation
 
 Follow these steps to edit your `build.gradle` and start using Adyen checkout for your Android application:
-1. Run `git pull git@git.is.adyen.com:android/pay.git`.
+1. Run `git pull https://github.com/Adyen/AdyenCheckout-android.git`.
 2. Copy `adyenpaysdk` in your application folder.
 3. Add the following code snippet to your `dependencies` module insinde build.gradle:
 
