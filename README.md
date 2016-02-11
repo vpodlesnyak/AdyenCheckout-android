@@ -163,4 +163,4 @@ Check our `adyen.com.adyenpaysdk.Adyen.java` for a complete code example of a li
 
 ### Merchant server
 
-For an example of how you can build your own merchant server, see the`Adyen/MerchantServer`repository.
+For an example of how you can build your own merchant server, see the <a href="https://github.com/Adyen/AdyenCheckout-ios/blob/master/ServerSideExample/Parse/cloud/app.js" target="_blank"> Merchant Server sample code. </a>
