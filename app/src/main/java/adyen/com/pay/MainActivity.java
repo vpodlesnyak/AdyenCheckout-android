@@ -44,7 +44,7 @@ public class MainActivity extends FragmentActivity implements AdyenCheckoutListe
 
     public void initPayment(View view) {
         ConfigLoader configLoader = new ConfigLoader();
-        JSONObject configuration = configLoader.loadJsonConfiguration();
+        JSONObject configuration = configLoader.loadJsonConfiguration(this);
         CheckoutRequest checkoutRequest = new CheckoutRequest();
         try {
             checkoutRequest.setBrandColor(R.color.nespresso_grey);

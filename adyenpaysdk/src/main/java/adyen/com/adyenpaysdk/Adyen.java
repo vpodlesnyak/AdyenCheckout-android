@@ -1,5 +1,6 @@
 package adyen.com.adyenpaysdk;
 
+import android.content.Context;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -46,8 +47,8 @@ public class Adyen {
         return mInstance;
     }
 
-    public void fetchPublicKey(final CompletionCallback completion) {
-        PaymentService paymentService = new PaymentServiceImpl();
+    public void fetchPublicKey(Context context, final CompletionCallback completion) {
+        PaymentService paymentService = new PaymentServiceImpl(context);
         String host = (useTestBackend) ? "test" : "live";
         String url = String.format("https://%s.adyen.com/hpp/cse/%s/json.shtml", host, token);
         paymentService.fetchPublicKey(url, new PaymentServiceImpl.VolleyCallback() {

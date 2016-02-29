@@ -209,7 +209,7 @@ public class PaymentActivity extends Activity {
                     final CardPaymentData cardPaymentData = buildCardData();
                     Adyen.getInstance().setToken(extras.getString("token"));
                     Adyen.getInstance().setUseTestBackend(extras.getBoolean("useTestBackend"));
-                    Adyen.getInstance().fetchPublicKey(new Adyen.CompletionCallback() {
+                    Adyen.getInstance().fetchPublicKey(PaymentActivity.this, new Adyen.CompletionCallback() {
                         @Override
                         public void onSuccess(String result) {
                             try {

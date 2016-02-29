@@ -1,5 +1,6 @@
 package adyen.com.pay.services;
 
+import android.content.Context;
 import android.util.Log;
 
 import com.android.volley.Response;
@@ -23,7 +24,10 @@ public class PaymentServiceImpl implements PaymentService {
 
     private JSONObject configuration;
 
-    public PaymentServiceImpl() {
+    private Context context;
+
+    public PaymentServiceImpl(final Context context) {
+        this.context = context;
         getConfiguration();
     }
 
@@ -46,7 +50,7 @@ public class PaymentServiceImpl implements PaymentService {
             }
         });
 
-        NetworkController.getInstance().addToRequestQueue(jsonObjectRequest);
+        NetworkController.getInstance(context).addToRequestQueue(jsonObjectRequest);
     }
 
     private String getPaymentUrl() {
@@ -63,7 +67,7 @@ public class PaymentServiceImpl implements PaymentService {
 
     private void getConfiguration() {
         ConfigLoader configLoader = new ConfigLoader();
-        this.configuration = configLoader.loadJsonConfiguration();
+        this.configuration = configLoader.loadJsonConfiguration(context);
     }
 
     public interface VolleyCallback {
