@@ -27,7 +27,7 @@ public class PaymentServiceImpl implements PaymentService {
     public void fetchPublicKey(String hppUrl, final VolleyCallback callback) {
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
-                (Request.Method.GET, hppUrl, null, new Response.Listener<JSONObject>() {
+                (Request.Method.GET, hppUrl, (String)null, new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
                         Log.d(tag, response.toString());
