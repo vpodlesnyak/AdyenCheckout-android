@@ -47,6 +47,7 @@ public class PaymentActivity extends Activity {
     private LinearLayout mMerchantLogo;
     private LinearLayout mMainLayout;
     private ImageView mMerchantLogoImage;
+    private TextView mTitleTextView;
 
     private AdyenEditText mCreditCardNo;
     private AdyenEditText mCreditCardExpDate;
@@ -67,18 +68,20 @@ public class PaymentActivity extends Activity {
 
         extras = getIntent().getExtras();
 
-        mPaymentAmount = (TextView)findViewById(R.id.credit_card_pay);
-        mPayButton = (RelativeLayout)findViewById(R.id.pay_button);
-        mPaymentForm = (LinearLayout)findViewById(R.id.payment_form_layout);
-        mMerchantLogo = (LinearLayout)findViewById(R.id.merchant_logo_layout);
+        mPaymentAmount = (TextView) findViewById(R.id.credit_card_pay);
+        mPayButton = (RelativeLayout) findViewById(R.id.pay_button);
+        mPaymentForm = (LinearLayout) findViewById(R.id.payment_form_layout);
+        mMerchantLogo = (LinearLayout) findViewById(R.id.merchant_logo_layout);
+        mMainLayout = (LinearLayout) findViewById(R.id.main_layout);
 
-        mMainLayout = (LinearLayout)findViewById(R.id.main_layout);
+        mCreditCardNo = (AdyenEditText) findViewById(R.id.credit_card_no);
+        mCreditCardExpDate = (AdyenEditText) findViewById(R.id.credit_card_exp_date);
+        mCreditCardCvc = (AdyenEditText) findViewById(R.id.credit_card_cvc);
 
-        mCreditCardNo = (AdyenEditText)findViewById(R.id.credit_card_no);
-        mCreditCardExpDate = (AdyenEditText)findViewById(R.id.credit_card_exp_date);
-        mCreditCardCvc = (AdyenEditText)findViewById(R.id.credit_card_cvc);
+        mTitleTextView = (TextView) findViewById(R.id.title_textview);
+        mTitleTextView.setText(extras.getString("title"));
 
-        mMerchantLogoImage = (ImageView)findViewById(R.id.merchantLogoImage);
+        mMerchantLogoImage = (ImageView) findViewById(R.id.merchantLogoImage);
         mMerchantLogoImage.setImageResource(extras.getInt("logo"));
 
         showInputKeyboard();
@@ -86,10 +89,10 @@ public class PaymentActivity extends Activity {
         initPaymentButton();
         initAdyenEditTextListeners();
 
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             getWindow().
-                setStatusBarColor(Color.parseColor(
-                        ColorUtil.changeColorHSB(getResources().getString(extras.getInt("backgroundColor")))));
+                    setStatusBarColor(Color.parseColor(
+                            ColorUtil.changeColorHSB(getResources().getString(extras.getInt("backgroundColor")))));
         }
     }
 
@@ -100,7 +103,7 @@ public class PaymentActivity extends Activity {
     }
 
     private void showInputKeyboard() {
-        inputMethodManager = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+        inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         inputMethodManager.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
         calculateKeyboardHeight();
     }
@@ -115,7 +118,7 @@ public class PaymentActivity extends Activity {
                 int screenHeight = mMainLayout.getRootView().getHeight();
                 int heightDifference = screenHeight - (layoutRectangle.bottom - layoutRectangle.top);
 
-                if(heightDifference > 500) {
+                if (heightDifference > 500) {
                     Log.i(tag, "Logo height: " + (layoutRectangle.bottom - mPaymentForm.getHeight()));
                     setLogoLayoutHeight(layoutRectangle.bottom - mPaymentForm.getHeight());
                 }
@@ -144,31 +147,34 @@ public class PaymentActivity extends Activity {
         }
 
         private void initPaymentFragment() throws CheckoutRequestException {
-            if(checkoutRequest.getBrandColor() != 0) {
+            if (checkoutRequest.getBrandColor() != 0) {
                 arguments.putInt("backgroundColor", checkoutRequest.getBrandColor());
             } else {
                 throw new CheckoutRequestException("Brand color is not set! Please set the brand color.");
             }
 
-            if(checkoutRequest.getBrandLogo() != 0) {
+            if (checkoutRequest.getBrandLogo() != 0) {
                 arguments.putInt("logo", checkoutRequest.getBrandLogo());
             } else {
                 throw new CheckoutRequestException("Brand logo is not set! Please set the brand logo.");
             }
+            if (!TextUtils.isEmpty(checkoutRequest.getTitleText())) {
+                arguments.putString("title", checkoutRequest.getTitleText());
+            }
 
-            if(checkoutRequest.getCheckoutAmount() > 0) {
+            if (checkoutRequest.getCheckoutAmount() > 0) {
                 arguments.putFloat("amount", checkoutRequest.getCheckoutAmount());
             } else {
                 throw new CheckoutRequestException("Amount is not set! Please set the amount.");
             }
 
-            if(checkoutRequest.getCurrency() != null && !TextUtils.isEmpty(checkoutRequest.getCurrency().toString())) {
+            if (checkoutRequest.getCurrency() != null && !TextUtils.isEmpty(checkoutRequest.getCurrency().toString())) {
                 arguments.putString("currency", checkoutRequest.getCurrency().toString());
             } else {
                 throw new CheckoutRequestException("Currency is not set! Please set the currency.");
             }
 
-            if(!TextUtils.isEmpty(checkoutRequest.getToken())) {
+            if (!TextUtils.isEmpty(checkoutRequest.getToken())) {
                 arguments.putString("token", checkoutRequest.getToken());
             } else {
                 throw new CheckoutRequestException("Token is not set! Please set the token.");
@@ -188,7 +194,7 @@ public class PaymentActivity extends Activity {
     public void initPaymentButtonText() {
         String currencyCode = extras.getString("currency");
         String currencySign = getCurrencySign(currencyCode);
-        if(currencyCode.equals(Currency.USD.toString())) {
+        if (currencyCode.equals(Currency.USD.toString())) {
             mPaymentAmount.setText(mPaymentAmount.getText()
                     + " " + currencySign + " " + String.valueOf(String.format("%.02f", extras.getFloat("amount"))));
         } else {

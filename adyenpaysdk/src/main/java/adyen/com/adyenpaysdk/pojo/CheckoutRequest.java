@@ -13,6 +13,7 @@ public class CheckoutRequest {
     private int brandLogo;
     private String token;
     private boolean testBackend;
+    private String title;
 
 
     public float getCheckoutAmount() {
@@ -41,6 +42,14 @@ public class CheckoutRequest {
 
     public int getBrandLogo() {
         return brandLogo;
+    }
+
+    public void setTitle(String _title) {
+        this.title = _title;
+    }
+
+    public String getTitleText() {
+        return title;
     }
 
     public void setBrandLogo(int brandLogo) {
